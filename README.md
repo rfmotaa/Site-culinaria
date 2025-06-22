@@ -35,11 +35,11 @@ Seja você recrutador, professor ou apenas curioso, sinta-se à vontade para exp
 
 Começamos o desenvolvimento pelo front-end, criando o protótipo no Figma, onde planejamos a interface do site e como seriam seus wireframes responsivos.
 
-![image](https://github.com/user-attachments/assets/7ac48174-5205-4471-9be6-40e1b1350e97)
+![image](https://github.com/user-attachments/assets/ca52235b-ca67-4c48-b3cb-7638785535a6)
 
 Após a validação do layout, codificamos a interface utilizando HTML e CSS, priorizando uma estrutura limpa e estilização personalizada para manter uma identidade visual.
 
-![image](https://github.com/user-attachments/assets/9daf3e60-e471-4b5f-a9ed-9ce72f4c615d)
+![image](https://github.com/user-attachments/assets/e499e262-3185-456d-9503-db591cc9e9e9)
 
 Durante o desenvolvimento, utilizei as seguintes tecnologias e ferramentas:
 - Figma – Prototipagem visual do front-end.
@@ -55,5 +55,5 @@ Abra o terminal e execute o comando abaixo para clonar o repositório:
 git clone https://github.com/rfmotaa/Site-culinaria
 ```
 
-### 💬 4. Acesse a página principal (Live-server recomendado)
+### 💬 2. Acesse a página principal (Live-server recomendado)
 Abra o arquivo index.html da pasta com seu navegador para visualizar e interagir com o site.
