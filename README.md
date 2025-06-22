@@ -57,3 +57,21 @@ git clone https://github.com/rfmotaa/Site-culinaria
 
 ### 💬 2. Acesse a página principal (Live-server recomendado)
 Abra o arquivo index.html da pasta com seu navegador para visualizar e interagir com o site.
+
+## 📫 Contato dos integrantes do grupo
+
+Rafael Mota
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rfmotaa)
+
+Henrique Carvalho
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](http://github.com/henriquecarvalhodeandrade)
+
+Alice Monteiro
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AliceBiju)
+
+Leonardo de Oliveira
+
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rfmotaa)
