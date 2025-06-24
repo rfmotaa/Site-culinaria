@@ -41,7 +41,7 @@ function loadAllRecipes(searchTerm = '') {
         const card = `
             <div class="col">
                 <div class="card recipe-card h-100" onclick="showRecipeDetails(${recipe.id})">
-                    <img src="${recipe.imageUrl}" class="card-img-top" alt="${recipe.title}">
+                    <img src="${recipe.base64Image}" class="card-img-top" alt="${recipe.title}">
                     <div class="card-body">
                         <h5 class="card-title">${recipe.title}</h5>
                     </div>
@@ -49,7 +49,7 @@ function loadAllRecipes(searchTerm = '') {
             </div>
         `;
         grid.innerHTML += card;
-    });
+    })
 }
 
 function showRecipeDetails(id) {
@@ -66,16 +66,15 @@ function showRecipeDetails(id) {
 
     modalTitle.innerText = recipe.title;
     modalBody.innerHTML = `
-        <img src="${recipe.imageUrl}" class="img-fluid rounded mb-3" alt="${recipe.title}">
-        <p><strong><i class="bi bi-person-circle"></i> Autor:</strong> ${author ? author.username : 'Desconhecido'}</p>
-        <p><strong><i class="bi bi-clock"></i> Tempo de Preparo:</strong> ${recipe.prepTime}</p>
-        <hr>
-        <h5><i class="bi bi-card-checklist"></i> Ingredientes</h5>
-        <p style="white-space: pre-wrap;">${recipe.ingredients}</p>
-        <hr>
-        <h5><i class="bi bi-journal-text"></i> Modo de Preparo</h5>
-        <p style="white-space: pre-wrap;">${recipe.instructions}</p>
-    `;
+    <img src="${recipe.base64Image}" class="img-fluid rounded mb-3" alt="${recipe.title}">
+    <p><strong><i class="bi bi-person-circle"></i> Autor:</strong> ${author ? author.username : 'Desconhecido'}</p>
+    <p><strong><i class="bi bi-clock"></i> Tempo de Preparo:</strong> ${recipe.prepTime}</p>
+    <hr>
+    <h5><i class="bi bi-card-checklist"></i> Ingredientes</h5>
+    <p style="white-space: pre-wrap;">${recipe.ingredients}</p>
+    <hr>
+    <h5><i class="bi bi-journal-text"></i> Modo de Preparo</h5>
+    <p style="white-space: pre-wrap;">${recipe.instructions}</p>`;
 
     const recipeModal = new bootstrap.Modal(document.getElementById('recipeModal'));
     recipeModal.show();

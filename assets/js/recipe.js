@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
         loadMyRecipes(); 
 
         const recipeForm = document.getElementById('recipe-form');
-        recipeForm.addEventListener('submit', handleSaveRecipe);
+        if (recipeForm) {
+            recipeForm.addEventListener('submit', handleSaveRecipe);
+        }
 
         const cancelEditBtn = document.getElementById('cancel-edit-btn');
         cancelEditBtn.addEventListener('click', cancelEdit);
@@ -40,7 +42,7 @@ function loadMyRecipes() {
         const card = `
             <div class="col">
                 <div class="card h-100">
-                    <img src="${recipe.imageUrl}" class="card-img-top" alt="${recipe.title}">
+                    <img src="${recipe.base64Image}" class="card-img-top" alt="${recipe.title}">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">${recipe.title}</h5>
                         <p class="card-text text-muted small">Tempo: ${recipe.prepTime}</p>
@@ -62,38 +64,69 @@ function handleSaveRecipe(event) {
     const user = getLoggedInUser();
     const recipeId = document.getElementById('recipeId').value;
     const title = document.getElementById('recipeTitle').value;
-    const imageUrl = document.getElementById('recipeImageUrl').value;
+    const imageInput = document.getElementById('recipeimageFile');
+    const imageFile = imageInput.files[0];
     const prepTime = document.getElementById('recipePrepTime').value;
     const ingredients = document.getElementById('recipeIngredients').value;
     const instructions = document.getElementById('recipeInstructions').value;
-    
+
     let recipes = getRecipes();
 
-    if (recipeId) { 
+    if (imageFile) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const base64Image = e.target.result;
+
+            salvarReceita(recipes, user, recipeId, title, base64Image, prepTime, ingredients, instructions);
+        };
+
+        reader.readAsDataURL(imageFile);
+    } else {
+        // Caso o usuário não selecione uma nova imagem (em edição), recupera a imagem já existente
+        let base64Image = '';
+        if (recipeId) {
+            const existingRecipe = recipes.find(r => r.id == recipeId);
+            base64Image = existingRecipe ? existingRecipe.base64Image : '';
+        }
+
+        salvarReceita(recipes, user, recipeId, title, base64Image, prepTime, ingredients, instructions);
+    }
+}
+
+function salvarReceita(recipes, user, recipeId, title, base64Image, prepTime, ingredients, instructions) {
+    if (recipeId) {
         const recipeIndex = recipes.findIndex(r => r.id == recipeId);
 
         if (recipeIndex !== -1) {
-            recipes[recipeIndex] = { ...recipes[recipeIndex], title, imageUrl, prepTime, ingredients, instructions };
+            recipes[recipeIndex] = {
+                ...recipes[recipeIndex],
+                title,
+                base64Image,
+                prepTime,
+                ingredients,
+                instructions
+            };
         }
 
-    } else { 
+    } else {
         const newRecipe = {
             id: Date.now(),
             userId: user.id,
             title,
-            imageUrl,
+            base64Image,
             prepTime,
             ingredients,
             instructions
         };
-        
+
         recipes.push(newRecipe);
     }
 
     saveRecipes(recipes);
     alert('Receita salva com sucesso!');
-    cancelEdit(); 
-    loadMyRecipes(); 
+    cancelEdit();
+    loadMyRecipes();
 }
 
 function editRecipe(id) {
@@ -104,10 +137,10 @@ function editRecipe(id) {
         document.getElementById('recipe-form-title').innerText = "Editar Receita";
         document.getElementById('recipeId').value = recipe.id;
         document.getElementById('recipeTitle').value = recipe.title;
-        document.getElementById('recipeImageUrl').value = recipe.imageUrl;
         document.getElementById('recipePrepTime').value = recipe.prepTime;
         document.getElementById('recipeIngredients').value = recipe.ingredients;
         document.getElementById('recipeInstructions').value = recipe.instructions;
+        document.getElementById('recipeimageFile').value = ""; // Limpa o campo de upload
         document.getElementById('save-recipe-btn').innerText = "Salvar Alterações";
         document.getElementById('cancel-edit-btn').style.display = 'inline-block';
         window.scrollTo(0, 0);
